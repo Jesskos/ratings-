@@ -2,6 +2,7 @@
 
 from sqlalchemy import func
 from model import User
+from model import Movie 
 # from model import Rating
 # from model import Movie
 
@@ -41,16 +42,25 @@ def load_movies():
 
     for row in open("seed_data/u.item"):
         row = row.rstrip()
-        movie_id, title, release_at, imbd_url = row.split("|")
+        split_row = row.split("|")
+        new_row = split_row[0:-19]
 
-        movie = Movie(movie_id=movie_id, title=title, ) 
+        movie_id = new_row[0] 
+        title = new_row[1] 
+        release_at = new_row[2] 
+        imdb_url = new_row[4] 
 
-        db.session.add(user)
-        db.session.commit()
+        movie = Movie(movie_id=movie_id, title=title, 
+                        release_at=release_at, imdb_url=imdb_url) 
 
+         # Adding each item as we are running for loop
+        db.session.add(movie)
+   
 
+    # committing the batch
+    db.session.commit()
 
-
+    # committing the batch 
 
 
 def load_ratings():
