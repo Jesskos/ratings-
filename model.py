@@ -2,6 +2,8 @@
 
 from flask_sqlalchemy import SQLAlchemy
 
+from datetime import datetime 
+
 # This is the connection to the PostgreSQL database; we're getting this through
 # the Flask-SQLAlchemy helper library. On this, we can find the `session`
 # object, where we do most of our interactions (like committing, etc.)
@@ -45,9 +47,9 @@ class Movie(db.Model):
     __tablename__ = "movies"
 
     movie_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    title = db.Column(db.String(64), nullable=False)
+    title = db.Column(db.String(256), nullable=False)
     release_at = db.Column(db.DateTime, nullable=False)
-    imdb_url = db.Column(db.String(64), nullable=True)    
+    imdb_url = db.Column(db.String(256), nullable=True)    
 
 
 ##############################################################################
