@@ -59,6 +59,13 @@ def register_process():
         return redirect("/")
 
 
+@app.route("/login")
+def log_in():
+
+    # query for email address 
+    # check if email address matches password, log in, then add uer id to flask session
+    return render_template("login.html")
+
 
 
 if __name__ == "__main__":
