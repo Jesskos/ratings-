@@ -51,20 +51,43 @@ def register_process():
 
     if user:
         flash("Your account already exists!")
-        return redirect("/")
+        
     else:
         new_user = User(email=email, password=password)
         db.session.add(new_user)
         db.session.commit()
-        return redirect("/")
+        flash("You have now been registered. Please log in!")
+
+    return render_template("login.html")
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET"])
 def log_in():
 
+    # get email address 
+    email = request.args.get("Email")
+
+    # get password 
+    password = request.args.get("Password")
+
     # query for email address 
-    # check if email address matches password, log in, then add uer id to flask session
-    return render_template("login.html")
+    user = User.query.filter_by(email=email).first()
+
+    if user:
+    # check if email address matches password, log in, 
+        if password == user.password:
+
+            flash ("success!")
+            session['user'] = user.user_id
+            return redirect("/")
+        else:
+            flash("Password did not match. Please try again.")
+            return render_template("login.html")
+    else:
+        flash("User doesn't exist. Please register.")
+        return redirect("/")       
+    
+
 
 
 

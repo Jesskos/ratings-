@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-{% block title %}Login{% endblock %}
+{% block title %}Homepage{% endblock %}
 
-<form action="/login" method="GET">
+<form action="/register" method="GET">
 	Email address: <input type="text" name="Email" required>
 	Password: <input type="text" name="Password" required> 
 	<input type="submit" value="Submit">
 </form>
-
-{% endblock %}
