@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
+{% block title %}Homepage{% endblock %}
+
+<form action="/register" method="POST">
+	Email address: <input type="text" name="Email" required>
+	Password: <input type="text" name="Password" required> 
+	<input type="submit" value="Submit">
+</form>
 
 <h1> Ratings </h1>
 

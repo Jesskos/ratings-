@@ -30,7 +30,35 @@ def user_list():
     """Show list of users."""
 
     users = User.query.all()
-    return render_template("user_list.html", users=users)    
+    return render_template("user_list.html", users=users)
+
+@app.route("/register", methods=["GET"])
+def register_form():
+    """ Requests email and password"""
+
+    # ask for email and password
+    return render_template("homepage.html")
+
+
+@app.route("/register", methods=["POST"])
+def register_process():
+
+    email = request.form.get("Email")
+
+    password = request.form.get("Password")
+    
+    user = User.query.filter_by(email=email).first()
+
+    if user:
+        flash("Your account already exists!")
+        return redirect("/")
+    else:
+        new_user = User(email=email, password=password)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect("/")
+
+
 
 
 if __name__ == "__main__":
